@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Português</title>
+<meta name="theme-color" content="#141413">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇷</text></svg>">
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1d1d1b; --muted:#6b6a64; --line:#e3e1d9;
+  --accent:#0b7a4b; --accent-soft:#e3f2ea; --track:#ebe9e2; --chip:#efede6;
+}
+@media (prefers-color-scheme: dark){ :root{
+  --bg:#141413; --card:#1e1e1c; --ink:#ecebe6; --muted:#a3a29b; --line:#33322e;
+  --accent:#4fc28a; --accent-soft:#16301f; --track:#2c2b28; --chip:#2a2926;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:30px;margin:0}
+.sub{color:var(--muted);margin:2px 0 22px}
+.hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.ring{width:96px;height:96px}
+.ring .val{font-size:22px;font-weight:700;fill:var(--ink)}
+.stats{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin:6px 0 12px}
+.stats b{color:var(--ink);font-size:18px;display:block}
+.btn{display:inline-block;border:0;background:var(--accent);color:#fff;border-radius:12px;padding:10px 16px;font:inherit;font-weight:600;text-decoration:none;cursor:pointer}
+.btn.ghost{background:var(--chip);color:var(--ink)}
+h2{font-size:19px;margin:30px 0 4px}
+.unit-sub{color:var(--muted);font-size:14px;margin:0 0 10px}
+.lesson{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:8px 0;text-decoration:none;color:inherit}
+a.lesson:hover{border-color:var(--accent)}
+.lesson.locked{opacity:.55}
+.num{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--chip);font-size:14px}
+.lesson.done .num{background:var(--accent);color:#fff}
+.lesson.started .num{background:var(--accent-soft);color:var(--accent)}
+.info{flex:1;min-width:0}
+.title{font-weight:600}
+.meta{color:var(--muted);font-size:13px}
+.bars{display:flex;gap:6px;margin-top:6px}
+.bar{flex:1;height:5px;background:var(--track);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.pct{flex:none;font-weight:600;font-size:14px;color:var(--muted);min-width:40px;text-align:right}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:30px}
+summary{cursor:pointer;font-weight:600}
+textarea{width:100%;min-height:80px;font:13px ui-monospace,Menlo,monospace;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:8px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--muted);font-size:14px}
+.levels{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.lvl{padding:4px 10px;border-radius:999px;background:var(--chip);font-size:13px;color:var(--muted)}
+.lvl.on{background:var(--accent);color:#fff}
+@media (max-width:480px){.hero{grid-template-columns:1fr;justify-items:start}}
+</style>
+</head>
+<body>
+<main>
+  <h1>🇧🇷 Português</h1>
+  <p class="sub">Curso Nulinga · nivel Pré-Principiante (A0)</p>
+
+  <section class="hero">
+    <svg class="ring" viewBox="0 0 100 100" aria-label="Progreso total">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--track)" stroke-width="10"/>
+      <circle id="ringArc" cx="50" cy="50" r="42" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)" stroke-dasharray="0 264"/>
+      <text class="val" id="ringVal" x="50" y="58" text-anchor="middle">0%</text>
+    </svg>
+    <div>
+      <div class="stats">
+        <div><b id="sDone">0</b>lecciones completas</div>
+        <div><b id="sEx">0</b>ejercicios bien</div>
+        <div><b id="sCards">0</b>palabras sabidas</div>
+        <div><b id="sLast">—</b>última vez</div>
+      </div>
+      <a class="btn" id="cont" href="a0/l01.html">Empezar</a>
+    </div>
+  </section>
+
+  <div id="units"></div>
+
+  <div class="levels" aria-label="Niveles del curso">
+    <span class="lvl on">A0</span><span class="lvl">A1</span><span class="lvl">A2</span><span class="lvl">B1</span><span class="lvl">B2</span><span class="lvl">C1</span><span class="lvl">C2</span>
+  </div>
+
+  <details>
+    <summary>Pasar mi progreso a otro dispositivo</summary>
+    <p class="muted">El progreso se guarda en cada navegador. Para seguir en otro (celu ↔ compu): copiá el código acá, abrí esta página en el otro y pegalo.</p>
+    <textarea id="code" spellcheck="false" placeholder="Pegá acá el código de otro dispositivo…"></textarea>
+    <div class="row">
+      <button class="btn ghost" id="copy">Copiar mi código</button>
+      <button class="btn" id="load">Cargar código pegado</button>
+      <span class="muted" id="msg"></span>
+    </div>
+  </details>
+</main>
+
+<script>
+const UNITS=[
+  {n:1,title:'Uma língua, um mundo',sub:'Alfabeto, acentos, artículos, pronombres, SER, presentarse',lessons:[
+    {id:'a0-l01',n:1,title:'Português, língua pluricêntrica',href:'a0/l01.html'},
+    {id:'a0-l02',n:2,title:'Negócios em português'},
+    {id:'a0-l03',n:3,title:'Cultura e negócios'},
+    {id:'a0-l04',n:4,title:'Conhecendo o Brasil'},
+    {id:'a0-l05',n:5,title:'Revisão'}]},
+  {n:2,title:'Viagem de negócios',sub:'Días, meses, horas, poder/fazer, transporte, preguntas, futuro con "vou"',lessons:[
+    {id:'a0-l06',n:6,title:'Planejando a viagem'},
+    {id:'a0-l07',n:7,title:'Chegando no Brasil'},
+    {id:'a0-l08',n:8,title:'Eu vou de metrô'},
+    {id:'a0-l09',n:9,title:'Vamos jantar fora?'},
+    {id:'a0-l10',n:10,title:'Revisão'}]},
+];
+const ALL=UNITS.flatMap(u=>u.lessons);
+let P={}; try{P=JSON.parse(localStorage.getItem('pt-progress')||'{}')}catch{}
+
+// Lesson score: exercises 50%, flashcards 30%, own introduction 10%, every tab opened 10%.
+function parts(p){ if(!p) return {ex:0,cards:0,intro:0,seen:0};
+  return {ex:p.exTotal?p.ex/p.exTotal:0, cards:p.cardsTotal?p.cards/p.cardsTotal:0, intro:p.intro?1:0, seen:Math.min(1,Object.keys(p.seen||{}).length/5)}; }
+const score=p=>{const x=parts(p);return Math.round(100*(x.ex*.5+x.cards*.3+x.intro*.1+x.seen*.1));};
+function ago(t){ if(!t) return '—'; const d=Math.floor((Date.now()-t)/864e5); return d===0?'hoy':d===1?'ayer':`hace ${d} días`; }
+
+function render(){
+  document.getElementById('units').innerHTML=UNITS.map(u=>`<h2>Unidade ${u.n} · ${u.title}</h2><p class="unit-sub">${u.sub}</p>`+u.lessons.map(l=>{
+    const p=P[l.id], sc=score(p), x=parts(p);
+    const cls=!l.href?'locked':sc>=90?'done':p?'started':'';
+    const meta=!l.href?'Próximamente':!p?'Sin empezar':`Ejercicios ${p.ex||0}/${p.exTotal||'–'} · tarjetas ${p.cards||0}/${p.cardsTotal||'–'}${p.intro?' · presentación ✓':''}`;
+    const inner=`<div class="num">${sc>=90?'✓':l.n}</div><div class="info"><div class="title">${l.title}</div><div class="meta">${meta}</div>${l.href&&p?`<div class="bars"><div class="bar" title="Ejercicios"><i style="width:${x.ex*100}%"></i></div><div class="bar" title="Tarjetas"><i style="width:${x.cards*100}%"></i></div></div>`:''}</div>${l.href?`<div class="pct">${sc}%</div>`:''}`;
+    return l.href?`<a class="lesson ${cls}" href="${l.href}">${inner}</a>`:`<div class="lesson ${cls}">${inner}</div>`;
+  }).join('')).join('');
+  const total=Math.round(ALL.reduce((a,l)=>a+score(P[l.id]),0)/ALL.length);
+  document.getElementById('ringArc').setAttribute('stroke-dasharray',`${2.64*total} 264`);
+  document.getElementById('ringVal').textContent=total+'%';
+  const vals=Object.values(P);
+  document.getElementById('sDone').textContent=ALL.filter(l=>score(P[l.id])>=90).length;
+  document.getElementById('sEx').textContent=vals.reduce((a,p)=>a+(p.ex||0),0);
+  document.getElementById('sCards').textContent=vals.reduce((a,p)=>a+(p.cards||0),0);
+  const last=Object.entries(P).sort((a,b)=>(b[1].last||0)-(a[1].last||0))[0];
+  document.getElementById('sLast').textContent=ago(last?.[1].last);
+  // Continue: most recent lesson if unfinished, else the next available one
+  const avail=ALL.filter(l=>l.href); let target=avail[0];
+  if(last){ const cur=avail.find(l=>l.id===last[0]); target = cur && score(P[cur.id])<90 ? cur : (avail.find(l=>score(P[l.id])<90)||cur); }
+  const c=document.getElementById('cont'); c.href=target.href; c.textContent=(last?'Continuar: ':'Empezar: ')+`Lição ${String(target.n).padStart(2,'0')}`;
+}
+render();
+
+// ---------- move progress between devices ----------
+const LS_KEYS=()=>Object.keys(localStorage).filter(k=>k.startsWith('pt-'));
+document.getElementById('copy').onclick=async()=>{
+  const data={}; LS_KEYS().forEach(k=>data[k]=localStorage.getItem(k));
+  const code=btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  try{await navigator.clipboard.writeText(code);msg('Copiado ✓');}catch{document.getElementById('code').value=code;msg('Seleccioná y copiá el código');}
+};
+document.getElementById('load').onclick=()=>{
+  try{ const data=JSON.parse(decodeURIComponent(escape(atob(document.getElementById('code').value.trim()))));
+    Object.entries(data).forEach(([k,v])=>{ if(k.startsWith('pt-')) localStorage.setItem(k,v); });
+    P=JSON.parse(localStorage.getItem('pt-progress')||'{}'); render(); msg('Progreso cargado ✓');
+  }catch{ msg('Ese código no es válido'); }
+};
+function msg(t){document.getElementById('msg').textContent=t;}
+</script>
+</body>
+</html>

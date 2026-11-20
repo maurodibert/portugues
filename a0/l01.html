@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lição 01 · A0</title>
+<meta name="theme-color" content="#141413">
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1d1d1b; --muted:#6b6a64; --line:#e3e1d9;
+  --accent:#0b7a4b; --accent-soft:#e3f2ea; --warn:#a86500; --warn-soft:#fbf0dc;
+  --bad:#b3261e; --bad-soft:#fbe5e3; --chip:#efede6;
+}
+@media (prefers-color-scheme: dark){ :root{
+  --bg:#141413; --card:#1e1e1c; --ink:#ecebe6; --muted:#a3a29b; --line:#33322e;
+  --accent:#4fc28a; --accent-soft:#16301f; --warn:#e2a54a; --warn-soft:#33270f;
+  --bad:#f08079; --bad-soft:#3a1a18; --chip:#2a2926;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{max-width:880px;margin:0 auto;padding:12px 16px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.bar strong{margin-right:auto;font-size:15px}
+.home{color:var(--ink);text-decoration:none;font-size:20px;padding:0 6px 0 0}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:999px;font-size:14px;cursor:pointer}
+.tab[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+main{max-width:880px;margin:0 auto;padding:24px 16px 80px}
+h1{font-size:28px;margin:0 0 4px}
+h2{font-size:21px;margin:32px 0 10px}
+h3{font-size:17px;margin:20px 0 8px}
+p.lead{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
+.tip{background:var(--warn-soft);border-color:transparent}
+.tip b{color:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:13px}
+.say{border:0;background:var(--chip);color:var(--ink);border-radius:8px;padding:2px 8px;cursor:pointer;font-size:13px;margin-left:4px}
+.say:hover{background:var(--accent-soft)}
+.pt{font-weight:600}
+[data-s].pt, .letter, .fc{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cg%20stroke%3D%27%23000%27%20stroke-width%3D%274%27%3E%3Cpath%20d%3D%27M4%209h3l5-4v14l-5-4H4z%27/%3E%3Cpath%20d%3D%27M16%209a4%204%200%200%201%200%206M19%206a8%208%200%200%201%200%2012%27/%3E%3C/g%3E%3Cg%20stroke%3D%27%23fff%27%20stroke-width%3D%271.8%27%3E%3Cpath%20d%3D%27M4%209h3l5-4v14l-5-4H4z%27%20fill%3D%27%23fff%27/%3E%3Cpath%20d%3D%27M16%209a4%204%200%200%201%200%206M19%206a8%208%200%200%201%200%2012%27/%3E%3C/g%3E%3C/svg%3E") 14 14, pointer}
+[data-s].pt{text-decoration:underline dotted color-mix(in srgb,var(--accent) 60%,transparent);text-underline-offset:3px}
+[data-s].pt:hover{color:var(--accent)}
+.letters{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.letter{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.letter:hover{border-color:var(--accent)}
+.letter .L{font-size:24px;font-weight:700}
+.letter .n{color:var(--muted);font-size:14px}
+.ex{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.ex:last-child{border-bottom:0}
+.ex input{font:inherit;padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:150px}
+.ex input.wide{width:min(100%,420px)}
+.ex input.ok{border-color:var(--accent);background:var(--accent-soft)}
+.ex input.almost{border-color:var(--warn);background:var(--warn-soft)}
+.ex input.bad{border-color:var(--bad);background:var(--bad-soft)}
+.fb{font-size:13px;color:var(--muted);width:100%}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:4px 12px;cursor:pointer;font:inherit}
+.opt.ok{border-color:var(--accent);background:var(--accent-soft)}
+.opt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.btn{border:0;background:var(--accent);color:#fff;border-radius:10px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:var(--chip);color:var(--ink)}
+.score{font-weight:600;margin-left:10px}
+.flash{perspective:1000px;max-width:460px;margin:16px auto}
+.fc{position:relative;height:220px;transition:transform .45s;transform-style:preserve-3d}
+.fc.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;backface-visibility:hidden}
+.face.back{transform:rotateY(180deg);background:var(--accent-soft)}
+.face .big{font-size:28px;font-weight:700}
+.face .small{color:var(--muted);margin-top:8px}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+textarea{width:100%;min-height:140px;font:inherit;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+section[hidden]{display:none}
+.muted{color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.fc{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a href="../index.html" class="home" aria-label="Volver a las lecciones">←</a><strong>🇧🇷 A0 · Lição 01</strong>
+  <button class="tab" data-t="aprender" aria-selected="true">1 · Aprender</button>
+  <button class="tab" data-t="vocab">2 · Vocabulário</button>
+  <button class="tab" data-t="exerc">3 · Exercícios</button>
+  <button class="tab" data-t="cards">4 · Tarjetas</button>
+  <button class="tab" data-t="falar">5 · Apresente-se</button>
+</div></header>
+
+<main>
+<!-- ============ 1. APRENDER ============ -->
+<section id="aprender">
+  <h1>Português, língua pluricêntrica</h1>
+  <p class="lead">Unidade 1 · Uma língua, um mundo. Pasá el mouse por arriba de cualquier palabra subrayada para escucharla.</p>
+
+  <h2>1. Un idioma, varios centros</h2>
+  <div class="card">
+    <p>"Pluricêntrica" quiere decir que el portugués tiene <b>más de una norma válida</b>: la brasileña y la europea (Portugal) son las dos grandes, y África tiene las suyas. En el curso se usa la de <b>Brasil</b>.</p>
+    <p>Se habla oficialmente en 9 países (los <span class="pt" data-s="países lusófonos">países lusófonos</span>):</p>
+    <table>
+      <tr><th>País</th><th>Gentilicio</th></tr>
+      <tr><td><span class="pt" data-s="o Brasil">o Brasil</span></td><td>brasileiro / brasileira</td></tr>
+      <tr><td><span class="pt" data-s="Portugal">Portugal</span></td><td>português / portuguesa</td></tr>
+      <tr><td><span class="pt" data-s="Angola">Angola</span></td><td>angolano / angolana</td></tr>
+      <tr><td><span class="pt" data-s="Moçambique">Moçambique</span></td><td>moçambicano / moçambicana</td></tr>
+      <tr><td><span class="pt" data-s="Cabo Verde">Cabo Verde</span></td><td>cabo-verdiano / cabo-verdiana</td></tr>
+      <tr><td><span class="pt" data-s="Guiné-Bissau">Guiné-Bissau</span>, <span class="pt" data-s="São Tomé e Príncipe">São Tomé e Príncipe</span>, <span class="pt" data-s="Timor-Leste">Timor-Leste</span>, <span class="pt" data-s="Guiné Equatorial">Guiné Equatorial</span></td><td class="muted">—</td></tr>
+    </table>
+  </div>
+
+  <h2>2. O alfabeto</h2>
+  <p>26 letras, igual que el español pero <b>sin ñ</b> (se escribe <span class="pt" data-s="nh">nh</span>: <span class="pt" data-s="espanhol">espanhol</span>) y con nombres distintos. K, W e Y son "letras extranjeras". Pasá el mouse por cada letra:</p>
+  <div class="letters" id="letters"></div>
+  <div class="card tip"><b>Ojo:</b> "<i>lh</i>" suena como la "ll" de "llave" en España (<span class="pt" data-s="trabalho">trabalho</span>), y "<i>nh</i>" como la ñ (<span class="pt" data-s="amanhã">amanhã</span>).</div>
+
+  <h2>3. Sinais diacríticos (tildes y signos)</h2>
+  <div class="card">
+    <table>
+      <tr><th>Signo</th><th>Qué hace</th><th>Ejemplo</th></tr>
+      <tr><td>´ agudo</td><td>sílaba tónica + vocal <b>abierta</b></td><td><span class="pt" data-s="café">café</span>, <span class="pt" data-s="avó">avó</span> (abuela)</td></tr>
+      <tr><td>^ circunflexo</td><td>sílaba tónica + vocal <b>cerrada</b></td><td><span class="pt" data-s="você">você</span>, <span class="pt" data-s="avô">avô</span> (abuelo)</td></tr>
+      <tr><td>~ til</td><td>vocal <b>nasal</b> (sale por la nariz)</td><td><span class="pt" data-s="pão">pão</span>, <span class="pt" data-s="irmã">irmã</span>, <span class="pt" data-s="informações">informações</span></td></tr>
+      <tr><td>ç cedilha</td><td>suena "s" antes de a, o, u</td><td><span class="pt" data-s="França">França</span>, <span class="pt" data-s="açúcar">açúcar</span></td></tr>
+      <tr><td>` crase</td><td>une a + a</td><td><span class="pt" data-s="Vou à reunião.">Vou à reunião.</span></td></tr>
+    </table>
+  </div>
+  <div class="card tip"><b>Truco:</b> <span class="pt" data-s="avó">avó</span> (abuela, "ó" abierta) vs <span class="pt" data-s="avô">avô</span> (abuelo, "ô" cerrada). El sombrerito ^ "cierra" la boca.</div>
+
+  <h2>4. Artigos</h2>
+  <div class="card">
+    <table>
+      <tr><th></th><th>Masculino</th><th>Femenino</th></tr>
+      <tr><td>Definido (el/la)</td><td><span class="pt" data-s="o">o</span> · <span class="pt" data-s="os">os</span></td><td><span class="pt" data-s="a">a</span> · <span class="pt" data-s="as">as</span></td></tr>
+      <tr><td>Indefinido (un/una)</td><td><span class="pt" data-s="um">um</span> · <span class="pt" data-s="uns">uns</span></td><td><span class="pt" data-s="uma">uma</span> · <span class="pt" data-s="umas">umas</span></td></tr>
+    </table>
+    <p>⚠️ Para un hispanohablante la trampa es que <b>"o" = el</b> y <b>"a" = la</b>.</p>
+    <h3>Diferencias con el español</h3>
+    <ul>
+      <li>Se usa artículo con nombres de personas, informalmente: <span class="pt" data-s="O Lucas trabalha na Nuvem.">O Lucas trabalha na Nuvem.</span></li>
+      <li>Y con posesivos: <span class="pt" data-s="a minha empresa">a minha empresa</span> (mi empresa).</li>
+      <li>Países: <span class="pt" data-s="o Brasil">o Brasil</span>, <span class="pt" data-s="a Argentina">a Argentina</span>, <span class="pt" data-s="os Estados Unidos">os Estados Unidos</span>, pero <span class="pt" data-s="Portugal">Portugal</span> sin artículo.</li>
+      <li>Género distinto: <span class="pt" data-s="o leite">o leite</span> (la leche), <span class="pt" data-s="a viagem">a viagem</span> (el viaje), <span class="pt" data-s="o sangue">o sangue</span>, <span class="pt" data-s="a dor">a dor</span>.</li>
+    </ul>
+  </div>
+
+  <h2>5. Pronomes pessoais + verbo SER</h2>
+  <div class="card">
+    <table>
+      <tr><th>Pronome</th><th>SER</th><th>Ejemplo</th></tr>
+      <tr><td>eu</td><td class="pt" data-s="sou">sou</td><td><span class="pt" data-s="Eu sou argentino.">Eu sou argentino.</span></td></tr>
+      <tr><td>você · ele · ela · <b>a gente</b></td><td class="pt" data-s="é">é</td><td><span class="pt" data-s="Você é da Nuvem?">Você é da Nuvem?</span></td></tr>
+      <tr><td>nós</td><td class="pt" data-s="somos">somos</td><td><span class="pt" data-s="Nós somos colegas.">Nós somos colegas.</span></td></tr>
+      <tr><td>vocês · eles · elas</td><td class="pt" data-s="são">são</td><td><span class="pt" data-s="Eles são brasileiros.">Eles são brasileiros.</span></td></tr>
+    </table>
+    <ul>
+      <li><b>você</b> = tú/vos, y se conjuga como <b>él</b> (3ª persona): <span class="pt" data-s="você é">você é</span>, <span class="pt" data-s="você trabalha">você trabalha</span>. En la mayoría de Brasil casi no se usa "tu".</li>
+      <li><b>a gente</b> = "nosotros" informal, muy usado al hablar. También va en 3ª singular: <span class="pt" data-s="A gente é do time mobile.">A gente é do time mobile.</span></li>
+      <li>No existe "vosotros": el plural es <b>vocês</b>.</li>
+    </ul>
+  </div>
+
+  <h2>6. Apresentar-se</h2>
+  <div class="card">
+    <table>
+      <tr><td class="pt" data-s="Oi! Tudo bem?">Oi! Tudo bem?</td><td>¡Hola! ¿Todo bien?</td></tr>
+      <tr><td class="pt" data-s="Tudo bom, e você?">Tudo bom, e você?</td><td>Todo bien, ¿y vos?</td></tr>
+      <tr><td class="pt" data-s="Meu nome é Lucas / Eu me chamo Lucas">Meu nome é… / Eu me chamo…</td><td>Me llamo…</td></tr>
+      <tr><td class="pt" data-s="Sou da Argentina.">Sou da Argentina.</td><td>Soy de Argentina.</td></tr>
+      <tr><td class="pt" data-s="Moro em Córdoba.">Moro em…</td><td>Vivo en…</td></tr>
+      <tr><td class="pt" data-s="Trabalho na Nuvem como desenvolvedor.">Trabalho na Nuvem como desenvolvedor.</td><td>Trabajo en Nuvem como desarrollador.</td></tr>
+      <tr><td class="pt" data-s="Muito prazer!">Muito prazer!</td><td>¡Mucho gusto!</td></tr>
+    </table>
+    <p class="muted">"<span class="pt" data-s="da">da</span> Argentina" = de + a (contracción obligatoria). "<span class="pt" data-s="na">na</span> Nuvem" = em + a. Las contracciones se ven a fondo en las próximas lecciones.</p>
+  </div>
+</section>
+
+<!-- ============ 2. VOCAB ============ -->
+<section id="vocab" hidden>
+  <h1>Vocabulário</h1>
+  <p class="lead">Las palabras de la lección. Pasá el mouse para escuchar; las que tienen ⚠️ son falsos amigos.</p>
+  <div class="card"><table id="vocabTable"><tr><th>Português</th><th>Español</th></tr></table></div>
+</section>
+
+<!-- ============ 3. EXERCÍCIOS ============ -->
+<section id="exerc" hidden>
+  <h1>Exercícios</h1>
+  <p class="lead">Escribí y apretá <b>Enter</b> o "Corregir". Verde = bien · naranja = bien pero falta un acento · rojo = no.</p>
+  <div id="exList"></div>
+  <div class="row" style="justify-content:flex-start;margin-top:16px">
+    <button class="btn" id="checkAll">Corregir todo</button>
+    <button class="btn ghost" id="resetAll">Borrar respuestas</button>
+    <span class="score" id="score"></span>
+  </div>
+</section>
+
+<!-- ============ 4. CARDS ============ -->
+<section id="cards" hidden>
+  <h1>Tarjetas</h1>
+  <p class="lead">Tocá la tarjeta para darla vuelta; pasá el mouse para escuchar la palabra en portugués. Las que marcás "Otra vez" vuelven al final del mazo.</p>
+  <div class="row">
+    <button class="btn ghost" id="dirBtn">Dirección: Português → Español</button>
+  </div>
+  <div class="flash"><div class="fc" id="fc">
+    <div class="face front"><div class="big" id="fFront"></div><div class="small" id="fHint">tocar para ver</div></div>
+    <div class="face back"><div class="big" id="fBack"></div><div class="small" id="fExtra"></div></div>
+  </div></div>
+  <div class="row">
+    <button class="btn ghost" id="again">Otra vez</button>
+    <button class="btn" id="good">La sé ✓</button>
+  </div>
+  <p class="muted" style="text-align:center" id="deckInfo"></p>
+</section>
+
+<!-- ============ 5. FALAR ============ -->
+<section id="falar" hidden>
+  <h1>Apresente-se</h1>
+  <p class="lead">Escribí tu presentación en portugués: nombre, de dónde sos, dónde vivís, dónde trabajás y qué hacés. 4–6 frases.</p>
+  <div class="card tip"><b>Modelo:</b> <span class="pt" style="font-weight:500;font-style:italic" data-s="Oi, tudo bem? Meu nome é Ana. Sou do Brasil, de Recife, mas moro em São Paulo. Trabalho na Nuvem como designer. A gente é um time pequeno. Muito prazer!">Oi, tudo bem? Meu nome é Ana. Sou do Brasil, de Recife, mas moro em São Paulo. Trabalho na Nuvem como designer. A gente é um time pequeno. Muito prazer!</span></div>
+  <textarea id="intro" placeholder="Oi! Meu nome é…"></textarea>
+  <div class="row" style="justify-content:flex-start">
+    <button class="btn" id="hear">Escuchar mi texto</button>
+    <button class="btn ghost" id="copy">Copiar para pegarlo en el chat</button>
+    <span class="muted" id="copied"></span>
+  </div>
+  <p class="muted">Pegámelo en el chat de Claude y te lo corrijo. Después lo practicamos como diálogo.</p>
+</section>
+</main>
+
+<script>
+// ---------- speech ----------
+// Fixed lesson text plays pre-recorded pt-BR audio (macOS voice Luciana) from audio/l01/.
+// Free text (the user's own intro) falls back to the browser voice, forced to pt-BR.
+const AUDIO = /*AUDIO_MANIFEST*/{"países lusófonos": "bcaf3b4231.m4a", "o Brasil": "349e6e42b0.m4a", "Portugal": "ea71b362e3.m4a", "Angola": "232bf11cb8.m4a", "Moçambique": "16cc318783.m4a", "Cabo Verde": "6764a88bc2.m4a", "Guiné-Bissau": "aafa8c77da.m4a", "São Tomé e Príncipe": "e5fb39109a.m4a", "Timor-Leste": "0a25bbf25b.m4a", "Guiné Equatorial": "3dd55168e1.m4a", "nh": "86e41e0469.m4a", "espanhol": "9051429abb.m4a", "trabalho": "1902e47813.m4a", "amanhã": "356bfed742.m4a", "café": "07117fe4a1.m4a", "avó": "bc4d446ea8.m4a", "você": "256f279526.m4a", "avô": "dd09c8243a.m4a", "pão": "4f6723373f.m4a", "irmã": "45eab522e6.m4a", "informações": "3cd86fbd7d.m4a", "França": "d510077907.m4a", "açúcar": "9059374ba7.m4a", "Vou à reunião.": "b13f05befe.m4a", "o": "d956797521.m4a", "os": "dd302f9468.m4a", "a": "0cc175b9c0.m4a", "as": "f970e2767d.m4a", "um": "0dd00e33b6.m4a", "uns": "07525332b1.m4a", "uma": "18f8891c64.m4a", "umas": "4444a54a7d.m4a", "O Lucas trabalha na Nuvem.": "54c00947db.m4a", "a minha empresa": "ed0c76e4b3.m4a", "a Argentina": "3385a0dc67.m4a", "os Estados Unidos": "6615691919.m4a", "o leite": "3c591e898f.m4a", "a viagem": "e019644e87.m4a", "o sangue": "4769f1fa38.m4a", "a dor": "a4b9d9aa06.m4a", "sou": "3bcce67a20.m4a", "Eu sou argentino.": "c99bb6f2aa.m4a", "é": "66ddcd97cf.m4a", "Você é da Nuvem?": "8081a3042c.m4a", "somos": "b797145a5b.m4a", "Nós somos colegas.": "e6a0c06a7d.m4a", "são": "189b71afaa.m4a", "Eles são brasileiros.": "ec20b1e810.m4a", "você é": "8bba3345aa.m4a", "você trabalha": "b45eede8a4.m4a", "A gente é do time mobile.": "e99d08c8d5.m4a", "Oi! Tudo bem?": "885b9e2156.m4a", "Tudo bom, e você?": "59a059037c.m4a", "Meu nome é Lucas / Eu me chamo Lucas": "8be8f55caa.m4a", "Sou da Argentina.": "06e7833ef2.m4a", "Moro em Córdoba.": "03b9cf8452.m4a", "Trabalho na Nuvem como desenvolvedor.": "32a29f8d18.m4a", "Muito prazer!": "ce7e67e62e.m4a", "da": "5ca2aa845c.m4a", "na": "6ec66e124f.m4a", "Oi, tudo bem? Meu nome é Ana. Sou do Brasil, de Recife, mas moro em São Paulo. Trabalho na Nuvem como designer. A gente é um time pequeno. Muito prazer!": "74b50baf21.m4a", "á": "36b7148acc.m4a", "bê": "74b7b3bae6.m4a", "cê": "e702153846.m4a", "dê": "54b91f69e4.m4a", "efe": "5ebf8364d1.m4a", "gê": "ca5e6ce6d4.m4a", "agá": "74cf004c21.m4a", "i": "865c0c0b4a.m4a", "jota": "85ad902286.m4a", "cá": "0d601dc115.m4a", "ele": "7c4edbcefc.m4a", "eme": "0d517589a2.m4a", "ene": "2e929b8890.m4a", "ó": "5ab838a6f4.m4a", "pê": "52129e43eb.m4a", "quê": "ac4144d388.m4a", "erre": "7c6d64da91.m4a", "esse": "4587c4183c.m4a", "tê": "fce367c06a.m4a", "u": "7b774effe4.m4a", "vê": "8142546e2c.m4a", "dáblio": "3b7a0294fe.m4a", "xis": "68f8cc835f.m4a", "ípsilon": "fa42a20237.m4a", "zê": "b5a338ae2a.m4a", "a língua": "32932b72ee.m4a", "o país": "4adce5e34d.m4a", "o mundo": "2b6d81895e.m4a", "a empresa": "80a42656db.m4a", "o trabalho": "937cddafc8.m4a", "o colega": "cdc766d9de.m4a", "o time": "3479ef0548.m4a", "a reunião": "ec6823a3f9.m4a", "o nome": "1e83a8eb73.m4a", "morar": "2bb3a1cf48.m4a", "trabalhar": "465b81d6d0.m4a", "chamar-se": "35e7b23810.m4a", "Muito prazer": "c3bbac2ec0.m4a", "Tudo bem?": "236831fee1.m4a", "Obrigado / Obrigada": "23aba8277a.m4a", "Tchau": "e0c420f765.m4a", "o desenvolvedor": "28e18315ff.m4a", "a cidade": "4c90dd670c.m4a", "o escritório": "7c43b91cb6.m4a", "esquisito": "aefaf5e869.m4a", "pronto": "f01717dd7a.m4a", "o polvo": "8fab1bc3f7.m4a", "os países": "cec4e3cc63.m4a", "as línguas": "9cddcf6a1d.m4a", "uma cidade": "e3c2b7e6c6.m4a", "um projeto": "60e8189240.m4a", "umas ideias": "fdddf7895e.m4a", "uns colegas": "555185f778.m4a", "Ela é de Portugal.": "94cd003907.m4a", "Vocês são da Nuvem?": "78096fe8f5.m4a", "Você é desenvolvedor?": "7dd5c4fee8.m4a", "ela": "8100240622.m4a", "eles": "c03f08f0b4.m4a", "elas": "e2e84334ff.m4a", "vocês": "5e0277adde.m4a", "a gente": "7f1f8256ce.m4a", "nós": "202719a718.m4a", "pao": "655ae040ae.m4a", "pâo": "7c86579f48.m4a", "Franca": "ca57ff3c72.m4a", "Fransa": "4d1e9c7423.m4a", "vocé": "b199844c1f.m4a", "voce": "f993cc0398.m4a", "meu nome é Lucas": "d61399c0f0.m4a", "sou da argentina": "bf7dcb289e.m4a", "trabalho na Nuvem": "2ed19c0954.m4a", "muito prazer": "16ac165b22.m4a", "a gente é colega": "bd02861fde.m4a"}/*END*/;
+const exSay=(q,ok,wide)=>wide?ok[0]:q.replace('___',ok[0]).replace(/\s*\(.*?\)/g,'').trim();
+let ptVoice = null, player = new Audio();
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  ptVoice = vs.find(v=>v.name.startsWith('Luciana')) || vs.find(v=>v.lang==='pt-BR'||v.lang==='pt_BR') || vs.find(v=>v.lang.startsWith('pt')) || null;
+}
+pickVoice(); speechSynthesis.onvoiceschanged = pickVoice;
+function say(t){
+  speechSynthesis.cancel(); player.pause();
+  if(AUDIO[t]){ player.src='audio/l01/'+AUDIO[t]; player.play(); return; }
+  if(!ptVoice) pickVoice();
+  if(!ptVoice){ alertNoVoice(); return; }
+  const u=new SpeechSynthesisUtterance(t); u.lang='pt-BR'; u.voice=ptVoice; u.rate=.85; speechSynthesis.speak(u);
+}
+function alertNoVoice(){ const el=document.getElementById('copied'); if(el) el.textContent='Este navegador no tiene voz en portugués; probá en Safari.'; }
+// Hovering an example word or a letter plays it (short delay so sweeping the mouse across doesn't fire everything).
+let hoverT=null, hoverEl=null;
+if(matchMedia('(hover: none)').matches) document.addEventListener('click',e=>{const el=e.target.closest('.pt[data-s], .letter'); if(el) say(el.dataset.s);});
+document.addEventListener('mouseover',e=>{const el=e.target.closest('.pt[data-s], .letter'); if(el===hoverEl) return; hoverEl=el; clearTimeout(hoverT); if(el) hoverT=setTimeout(()=>say(el.dataset.s),220);});
+
+// ---------- progress (read by ../index.html) ----------
+const LESSON='a0-l01';
+function report(patch){ try{ const all=JSON.parse(localStorage.getItem('pt-progress')||'{}'); all[LESSON]=Object.assign(all[LESSON]||{},patch,{last:Date.now()}); localStorage.setItem('pt-progress',JSON.stringify(all)); }catch{} }
+// ---------- tabs ----------
+const store = { get(k,d){try{return JSON.parse(localStorage.getItem('pt-a0-l01-'+k))??d}catch{return d}}, set(k,v){try{localStorage.setItem('pt-a0-l01-'+k,JSON.stringify(v))}catch{}} };
+function show(t){ document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t)); document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!==t); store.set('tab',t); scrollTo(0,0); report({seen:Object.assign(store.get('seen',{}),{[t]:1})}); store.set('seen',Object.assign(store.get('seen',{}),{[t]:1})); }
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>show(b.dataset.t));
+show(store.get('tab','aprender'));
+
+// ---------- alphabet ----------
+const ABC=[['A','á'],['B','bê'],['C','cê'],['D','dê'],['E','é'],['F','efe'],['G','gê'],['H','agá'],['I','i'],['J','jota'],['K','cá'],['L','ele'],['M','eme'],['N','ene'],['O','ó'],['P','pê'],['Q','quê'],['R','erre'],['S','esse'],['T','tê'],['U','u'],['V','vê'],['W','dáblio'],['X','xis'],['Y','ípsilon'],['Z','zê']];
+document.getElementById('letters').innerHTML = ABC.map(([l,n])=>`<div class="letter" data-s="${n}"><div class="L">${l}</div><div class="n">${n}</div></div>`).join('');
+
+// ---------- vocab ----------
+const VOCAB=[
+ ['a língua','el idioma, la lengua'],['o país','el país'],['o mundo','el mundo'],['a empresa','la empresa'],
+ ['o trabalho','el trabajo'],['o colega','el compañero de trabajo'],['o time','el equipo'],['a reunião','la reunión'],
+ ['o nome','el nombre'],['morar','vivir (residir)'],['trabalhar','trabajar'],['chamar-se','llamarse'],
+ ['Muito prazer','Mucho gusto'],['Tudo bem?','¿Todo bien?'],['Obrigado / Obrigada','Gracias (lo dice hombre / mujer)'],
+ ['Tchau','Chau'],['o desenvolvedor','el desarrollador'],['a cidade','la ciudad'],
+ ['o escritório','la oficina','⚠️ "oficina" en portugués = taller mecánico'],
+ ['esquisito','raro, extraño','⚠️ no es "exquisito" (= gostoso)'],
+ ['pronto','listo','⚠️ no es "pronto" (= logo, em breve)'],
+ ['o polvo','el pulpo','⚠️ el polvo = a poeira'],
+];
+document.getElementById('vocabTable').insertAdjacentHTML('beforeend', VOCAB.map(([p,e,n])=>`<tr><td class="pt" data-s="${p}">${p}</td><td>${e}${n?`<br><span class="muted">${n}</span>`:''}</td></tr>`).join(''));
+
+// ---------- exercises ----------
+const strip=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'');
+const norm=s=>s.toLowerCase().trim().replace(/[.!?¿¡,]/g,'').replace(/\s+/g,' ');
+const EX=[
+ {t:'A. Artigo definido (o, a, os, as)', items:[
+   ['___ Brasil',['o']],['___ Argentina',['a']],['___ empresa',['a']],['___ escritório',['o']],
+   ['___ países',['os']],['___ línguas',['as']],['___ reunião',['a']],['___ viagem (el viaje ⚠️)',['a']]]},
+ {t:'B. Artigo indefinido (um, uma, uns, umas)', items:[
+   ['___ cidade',['uma']],['___ projeto',['um']],['___ ideias',['umas']],['___ colegas (masc.)',['uns']]]},
+ {t:'C. Verbo SER', items:[
+   ['Eu ___ argentino.',['sou']],['Ela ___ de Portugal.',['é']],['Nós ___ colegas.',['somos']],
+   ['Vocês ___ da Nuvem?',['são']],['A gente ___ do time mobile.',['é']],['Eles ___ brasileiros.',['são']],['Você ___ desenvolvedor?',['é']]]},
+ {t:'D. ¿Qué pronombre reemplaza?', mc:true, items:[
+   ['A Ana',['ela'],['ele','ela','eles']],['O João e a Maria',['eles'],['eles','elas','vocês']],
+   ['Eu e o Pedro (informal)',['a gente'],['vocês','a gente','eles']],['Você e o Lucas',['vocês'],['nós','vocês','eles']]]},
+ {t:'E. Acentos y signos', mc:true, items:[
+   ['"abuelo" se escribe…',['avô'],['avó','avô']],['"pan" se escribe…',['pão'],['pao','pão','pâo']],
+   ['"Francia" se escribe…',['França'],['Franca','França','Fransa']],['"vos / usted" se escribe…',['você'],['vocé','você','voce']]]},
+ {t:'F. Traducí al portugués', wide:true, items:[
+   ['Me llamo Lucas.',['meu nome é Lucas','eu me chamo Lucas','me chamo Lucas']],
+   ['Soy de Argentina.',['sou da argentina','eu sou da argentina']],
+   ['Trabajo en Nuvem.',['trabalho na Nuvem','eu trabalho na Nuvem']],
+   ['¡Mucho gusto!',['muito prazer']],
+   ['Nosotros somos colegas. (con "a gente")',['a gente é colega','a gente é colegas']]]},
+];
+let qi=0; const answers=store.get('ans',{});
+document.getElementById('exList').innerHTML = EX.map(sec=>`<div class="card"><h3 style="margin-top:0">${sec.t}</h3>${sec.items.map(([q,ok,opts])=>{const id='q'+(qi++);
+  if(sec.mc) return `<div class="ex" data-id="${id}" data-ok='${JSON.stringify(ok)}'><span>${q}</span><div class="opts">${opts.map(o=>`<button class="opt" data-v="${o}">${o}</button>`).join('')}</div><div class="fb"></div></div>`;
+  return `<div class="ex" data-id="${id}" data-say="${exSay(q,ok,sec.wide)}" data-ok='${JSON.stringify(ok)}'><span>${sec.wide?q:q.split('___')[0]}</span><input class="${sec.wide?'wide':''}" autocomplete="off" spellcheck="false"><span>${sec.wide?'':q.split('___')[1]||''}</span><div class="fb"></div></div>`;}).join('')}</div>`).join('');
+
+function grade(ex){
+  const ok=JSON.parse(ex.dataset.ok), inp=ex.querySelector('input'), fb=ex.querySelector('.fb');
+  if(!inp) return ex.dataset.res||null;
+  const v=norm(inp.value); inp.className=inp.className.replace(/\b(ok|almost|bad)\b/g,'').trim();
+  if(!v){fb.textContent='';return null;}
+  const okN=ok.map(norm);
+  const res = okN.includes(v) ? 'ok' : okN.map(strip).includes(strip(v)) ? 'almost' : 'bad';
+  inp.classList.add(res);
+  fb.textContent = res==='ok'?'✓ '+ex.dataset.say: res==='almost'?`Casi: falta el acento → ${ex.dataset.say}`:`Respuesta: ${ex.dataset.say}`;
+  fb.classList.add('pt'); fb.dataset.s=ex.dataset.say;
+  answers[ex.dataset.id]=inp.value; store.set('ans',answers);
+  return res;
+}
+document.querySelectorAll('.ex').forEach(ex=>{
+  const inp=ex.querySelector('input');
+  if(inp){ if(answers[ex.dataset.id]){inp.value=answers[ex.dataset.id];grade(ex);} inp.addEventListener('keydown',e=>{if(e.key==='Enter'){grade(ex);updateScore();}}); }
+  ex.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    const ok=JSON.parse(ex.dataset.ok); ex.querySelectorAll('.opt').forEach(o=>o.classList.remove('ok','bad'));
+    const good=ok.includes(b.dataset.v); b.classList.add(good?'ok':'bad'); ex.dataset.res=good?'ok':'bad';
+    ex.querySelector('.fb').textContent=good?'✓':'Respuesta: '+ok[0]; if(good) say(b.dataset.v); updateScore();
+  });
+});
+function updateScore(){ const all=[...document.querySelectorAll('.ex')]; const r=all.map(ex=>ex.querySelector('input')?(ex.querySelector('input').classList.contains('ok')?'ok':ex.querySelector('input').classList.contains('almost')?'almost':null):ex.dataset.res); const ok=r.filter(x=>x==='ok').length, al=r.filter(x=>x==='almost').length; document.getElementById('score').textContent=`${ok} de ${all.length} bien${al?` · ${al} con acento a corregir`:''}`; report({ex:ok,exTotal:all.length}); }
+document.getElementById('checkAll').onclick=()=>{document.querySelectorAll('.ex').forEach(grade);updateScore();};
+document.getElementById('resetAll').onclick=()=>{store.set('ans',{});location.reload();};
+updateScore();
+
+// ---------- flashcards ----------
+let deck=store.get('deck',null)||VOCAB.map((_,i)=>i); let dir=store.get('dir','pt'); let known=store.get('known',0);
+const fc=document.getElementById('fc');
+function renderCard(){
+  fc.classList.remove('flip');
+  if(!deck.length){document.getElementById('fFront').textContent='¡Mazo terminado! 🎉';document.getElementById('fBack').textContent='';document.getElementById('fExtra').textContent='';document.getElementById('deckInfo').innerHTML='<button class="btn ghost" id="restart">Empezar de nuevo</button>';document.getElementById('restart').onclick=()=>{deck=VOCAB.map((_,i)=>i);known=0;save();renderCard();};return;}
+  const [p,e,n]=VOCAB[deck[0]];
+  document.getElementById('fFront').textContent= dir==='pt'?p:e;
+  document.getElementById('fBack').textContent= dir==='pt'?e:p;
+  document.getElementById('fExtra').textContent= n||'';
+  document.getElementById('deckInfo').textContent=`Quedan ${deck.length} · sabidas ${known}`;
+  document.getElementById('dirBtn').textContent= 'Dirección: '+(dir==='pt'?'Português → Español':'Español → Português');
+}
+function save(){store.set('deck',deck);store.set('known',known);store.set('dir',dir);report({cards:Math.min(known,VOCAB.length),cardsTotal:VOCAB.length});}
+fc.onclick=()=>fc.classList.toggle('flip');
+// Hovering the card plays the Portuguese word whenever the Portuguese side is the one showing.
+fc.onmouseenter=()=>{ if(!deck.length) return; if((dir==='pt')!==fc.classList.contains('flip')) say(VOCAB[deck[0]][0]); };
+document.getElementById('again').onclick=()=>{if(!deck.length)return;deck.push(deck.shift());save();renderCard();};
+document.getElementById('good').onclick=()=>{if(!deck.length)return;deck.shift();known++;save();renderCard();};
+document.getElementById('dirBtn').onclick=()=>{dir=dir==='pt'?'es':'pt';save();renderCard();};
+renderCard();
+
+// ---------- falar ----------
+const intro=document.getElementById('intro'); intro.value=store.get('intro','');
+intro.oninput=()=>{store.set('intro',intro.value);report({intro:intro.value.trim().length>40});};
+document.getElementById('hear').onclick=()=>intro.value.trim()&&say(intro.value);
+document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText('Corregime mi presentación (A0 Lição 01):\n'+intro.value);document.getElementById('copied').textContent='Copiado ✓';}catch{intro.select();document.getElementById('copied').textContent='Seleccionado: ⌘C';}};
+</script>
+</body>
+</html>
